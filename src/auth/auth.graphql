@@ -1,0 +1,26 @@
+type Auth {
+  email: String
+  password: String
+}
+type Token {
+  token: String
+}
+
+input CreateAuthInput {
+  email: String
+  password: String
+}
+
+input UpdateAuthInput {
+  id: Int!
+}
+
+type Query {
+  auth(createAuthInput: CreateAuthInput!): Token!
+}
+
+type Mutation {
+  createAuth(createAuthInput: CreateAuthInput!): Token!
+  updateAuth(updateAuthInput: UpdateAuthInput!): Auth!
+  removeAuth(id: Int!): Auth
+}

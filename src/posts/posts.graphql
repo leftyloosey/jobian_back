@@ -1,0 +1,38 @@
+scalar JSON
+scalar Date
+
+type Post {
+  id: Int!
+  timestamp: Date
+  title: String
+  content: JSON
+  published: Boolean
+  ministry: User
+  ministryId: Int
+}
+
+input CreatePostInput {
+  title: String
+  content: JSON
+  ministryId: Int
+}
+
+input UpdatePostInput {
+  id: Int!
+  title: String
+  content: JSON
+  published: Boolean
+  modified: Date
+}
+
+type Query {
+  posts: [Post]!
+  post(id: Int!): Post
+  postsInMinistry(id: Int!): [Post]!
+}
+
+type Mutation {
+  createPost(createPostInput: CreatePostInput!): Post!
+  updatePost(updatePostInput: UpdatePostInput!): Post!
+  removePost(id: Int!): Post
+}

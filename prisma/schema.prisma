@@ -1,0 +1,39 @@
+generator client {
+  provider     = "prisma-client"
+  output       = "../generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id         Int        @id @default(autoincrement())
+  email      String     @unique
+  password   String
+  name       String?
+  ministries Ministry[]
+}
+
+model Ministry {
+  id        Int      @id @default(autoincrement())
+  timestamp DateTime
+  title     String
+  heading   String
+  posts     Post[]
+  published Boolean  @default(true)
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  Int
+}
+
+model Post {
+  id         Int       @id @default(autoincrement())
+  title      String
+  content    Json
+  published  Boolean   @default(true)
+  timestamp  DateTime
+  modified   DateTime?
+  ministry   Ministry  @relation(fields: [ministryId], references: [id])
+  ministryId Int
+}
