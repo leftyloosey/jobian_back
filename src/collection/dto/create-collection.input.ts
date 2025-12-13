@@ -1,4 +1,4 @@
-export class CreateMinistryInput {
+export class CreateCollectionInput {
   title: string;
   heading: string;
   timestamp: Date;

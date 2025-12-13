@@ -6,7 +6,7 @@ import { ApolloDriverConfig, ApolloDriver } from '@nestjs/apollo';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 import { UserModule } from './user/user.module';
-import { MinistryModule } from './ministry/ministry.module';
+import { CollectionModule } from './collection/collection.module';
 import { AuthModule } from './auth/auth.module';
 import GraphQLJSON from 'graphql-type-json';
 
@@ -23,7 +23,7 @@ import GraphQLJSON from 'graphql-type-json';
     }),
     PostsModule,
     UserModule,
-    MinistryModule,
+    CollectionModule,
     AuthModule,
   ],
 

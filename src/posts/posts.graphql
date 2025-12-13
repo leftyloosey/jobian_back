@@ -7,14 +7,14 @@ type Post {
   title: String
   content: JSON
   published: Boolean
-  ministry: User
-  ministryId: Int
+  collection: User
+  collectionId: Int
 }
 
 input CreatePostInput {
   title: String
   content: JSON
-  ministryId: Int
+  collectionId: Int
 }
 
 input UpdatePostInput {
@@ -28,7 +28,7 @@ input UpdatePostInput {
 type Query {
   posts: [Post]!
   post(id: Int!): Post
-  postsInMinistry(id: Int!): [Post]!
+  postsInCollection(id: Int!): [Post]!
 }
 
 type Mutation {

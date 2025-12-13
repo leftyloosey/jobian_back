@@ -8,14 +8,14 @@ export class PostsService {
   constructor(private prisma: PrismaService) {}
 
   async create(createPostInput: CreatePostInput) {
-    const { title, content, ministryId } = createPostInput;
+    const { title, content, collectionId } = createPostInput;
     try {
       const newPost = await this.prisma.post.create({
         data: {
           timestamp: new Date(),
           title,
           content,
-          ministryId,
+          collectionId,
         },
       });
       console.log('post created:', newPost);
@@ -31,9 +31,9 @@ export class PostsService {
     return posts;
   }
 
-  async findAllPostsInMinistry(ministryId: number) {
+  async findAllPostsInCollection(collectionId: number) {
     const posts = await this.prisma.post.findMany({
-      where: { ministryId },
+      where: { collectionId },
     });
     return posts;
   }
@@ -41,7 +41,7 @@ export class PostsService {
   async findOne(id: number) {
     const post = await this.prisma.post.findUnique({
       where: { id: id },
-      include: { ministry: true },
+      include: { collection: true },
     });
     return post;
   }

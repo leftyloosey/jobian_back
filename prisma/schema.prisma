@@ -9,14 +9,14 @@ datasource db {
 }
 
 model User {
-  id         Int        @id @default(autoincrement())
-  email      String     @unique
+  id         Int          @id @default(autoincrement())
+  email      String       @unique
   password   String
   name       String?
-  ministries Ministry[]
+  ministries Collection[]
 }
 
-model Ministry {
+model Collection {
   id        Int      @id @default(autoincrement())
   timestamp DateTime
   title     String
@@ -28,12 +28,12 @@ model Ministry {
 }
 
 model Post {
-  id         Int       @id @default(autoincrement())
-  title      String
-  content    Json
-  published  Boolean   @default(true)
-  timestamp  DateTime
-  modified   DateTime?
-  ministry   Ministry  @relation(fields: [ministryId], references: [id])
-  ministryId Int
+  id           Int        @id @default(autoincrement())
+  title        String
+  content      Json
+  published    Boolean    @default(true)
+  timestamp    DateTime
+  modified     DateTime?
+  collection   Collection @relation(fields: [collectionId], references: [id])
+  collectionId Int
 }

@@ -17,13 +17,13 @@ export interface UpdateAuthInput {
     id: number;
 }
 
-export interface CreateMinistryInput {
+export interface CreateCollectionInput {
     title?: Nullable<string>;
     heading?: Nullable<string>;
     authorId?: Nullable<number>;
 }
 
-export interface UpdateMinistryInput {
+export interface UpdateCollectionInput {
     id: number;
     title?: Nullable<string>;
     heading?: Nullable<string>;
@@ -32,7 +32,7 @@ export interface UpdateMinistryInput {
 export interface CreatePostInput {
     title?: Nullable<string>;
     content?: Nullable<JSON>;
-    ministryId?: Nullable<number>;
+    collectionId?: Nullable<number>;
 }
 
 export interface UpdatePostInput {
@@ -64,12 +64,12 @@ export interface Token {
 
 export interface IQuery {
     auth(createAuthInput: CreateAuthInput): Token | Promise<Token>;
-    ministries(): Nullable<Ministry>[] | Promise<Nullable<Ministry>[]>;
-    ministriesWithPosts(): Nullable<Ministry>[] | Promise<Nullable<Ministry>[]>;
-    ministry(id: number): Nullable<Ministry> | Promise<Nullable<Ministry>>;
+    collections(): Nullable<Collection>[] | Promise<Nullable<Collection>[]>;
+    collectionsWithPosts(): Nullable<Collection>[] | Promise<Nullable<Collection>[]>;
+    collection(id: number): Nullable<Collection> | Promise<Nullable<Collection>>;
     posts(): Nullable<Post>[] | Promise<Nullable<Post>[]>;
     post(id: number): Nullable<Post> | Promise<Nullable<Post>>;
-    postsInMinistry(id: number): Nullable<Post>[] | Promise<Nullable<Post>[]>;
+    postsInCollection(id: number): Nullable<Post>[] | Promise<Nullable<Post>[]>;
     users(): Nullable<User>[] | Promise<Nullable<User>[]>;
     user(id: number): Nullable<User> | Promise<Nullable<User>>;
 }
@@ -78,9 +78,9 @@ export interface IMutation {
     createAuth(createAuthInput: CreateAuthInput): Token | Promise<Token>;
     updateAuth(updateAuthInput: UpdateAuthInput): Auth | Promise<Auth>;
     removeAuth(id: number): Nullable<Auth> | Promise<Nullable<Auth>>;
-    createMinistry(createMinistryInput: CreateMinistryInput): Ministry | Promise<Ministry>;
-    updateMinistry(updateMinistryInput: UpdateMinistryInput): Ministry | Promise<Ministry>;
-    removeMinistry(id: number): Nullable<Ministry> | Promise<Nullable<Ministry>>;
+    createCollection(createCollectionInput: CreateCollectionInput): Collection | Promise<Collection>;
+    updateCollection(updateCollectionInput: UpdateCollectionInput): Collection | Promise<Collection>;
+    removeCollection(id: number): Nullable<Collection> | Promise<Nullable<Collection>>;
     createPost(createPostInput: CreatePostInput): Post | Promise<Post>;
     updatePost(updatePostInput: UpdatePostInput): Post | Promise<Post>;
     removePost(id: number): Nullable<Post> | Promise<Nullable<Post>>;
@@ -89,7 +89,7 @@ export interface IMutation {
     removeUser(id: number): Nullable<User> | Promise<Nullable<User>>;
 }
 
-export interface Ministry {
+export interface Collection {
     id: number;
     title?: Nullable<string>;
     heading?: Nullable<string>;
@@ -105,8 +105,8 @@ export interface Post {
     title?: Nullable<string>;
     content?: Nullable<JSON>;
     published?: Nullable<boolean>;
-    ministry?: Nullable<User>;
-    ministryId?: Nullable<number>;
+    collection?: Nullable<User>;
+    collectionId?: Nullable<number>;
 }
 
 export interface User {

@@ -5,5 +5,5 @@ export class CreatePostInput {
   title: string;
   content: InputJsonObject;
   published: boolean;
-  ministryId: number;
+  collectionId: number;
 }

@@ -16,9 +16,9 @@ export class PostsResolver {
   findAll() {
     return this.postsService.findAll();
   }
-  @Query('postsInMinistry')
-  findAllPostsInMinistry(@Args('id') ministryId: number) {
-    return this.postsService.findAllPostsInMinistry(ministryId);
+  @Query('postsInCollection')
+  findAllPostsInCollection(@Args('id') collectionId: number) {
+    return this.postsService.findAllPostsInCollection(collectionId);
   }
 
   @Query('post')
