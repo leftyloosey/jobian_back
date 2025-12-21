@@ -36,8 +36,15 @@ export class CollectionService {
     });
     return collections;
   }
+  async findCollectionByUser(authorId: number) {
+    const collections = await this.prisma.collection.findMany({
+      where: { authorId },
+      include: { posts: true },
+    });
+    return collections;
+  }
 
-  async findOne(id: number) {
+  async findOneWithPosts(id: number) {
     const collection = await this.prisma.collection.findUnique({
       where: { id: id },
       include: { posts: true },

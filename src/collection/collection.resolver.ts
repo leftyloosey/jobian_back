@@ -24,9 +24,14 @@ export class CollectionResolver {
     return this.collectionService.findAllCollectionsWithPosts();
   }
 
-  @Query('collection')
-  findOne(@Args('id') id: number) {
-    return this.collectionService.findOne(id);
+  @Query('collectionWithPosts')
+  findOneWithPosts(@Args('id') id: number) {
+    return this.collectionService.findOneWithPosts(id);
+  }
+
+  @Query('collectionByUser')
+  findCollectionByUser(@Args('authorId') authorId: number) {
+    return this.collectionService.findCollectionByUser(authorId);
   }
 
   @Mutation('updateCollection')

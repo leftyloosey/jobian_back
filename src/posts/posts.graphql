@@ -7,7 +7,7 @@ type Post {
   title: String
   content: JSON
   published: Boolean
-  collection: User
+  collection: Collection
   collectionId: Int
 }
 
@@ -28,7 +28,7 @@ input UpdatePostInput {
 type Query {
   posts: [Post]!
   post(id: Int!): Post
-  postsInCollection(id: Int!): [Post]!
+  postsInCollection(collectionId: Int!): [Post]!
 }
 
 type Mutation {

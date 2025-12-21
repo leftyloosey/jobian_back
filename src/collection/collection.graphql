@@ -1,10 +1,10 @@
 type Collection {
   id: Int!
-  title: String
+  title: String!
   heading: String
   posts: [Post]
   author: User
-  authorId: Int
+  authorId: Int!
   timestamp: Date
 }
 
@@ -23,7 +23,8 @@ input UpdateCollectionInput {
 type Query {
   collections: [Collection]!
   collectionsWithPosts: [Collection]!
-  collection(id: Int!): Collection
+  collectionWithPosts(id: Int!): Collection
+  collectionByUser(authorId: Int!): [Collection]!
 }
 
 type Mutation {

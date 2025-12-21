@@ -17,7 +17,7 @@ export class PostsResolver {
     return this.postsService.findAll();
   }
   @Query('postsInCollection')
-  findAllPostsInCollection(@Args('id') collectionId: number) {
+  findAllPostsInCollection(@Args('collectionId') collectionId: number) {
     return this.postsService.findAllPostsInCollection(collectionId);
   }
 

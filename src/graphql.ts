@@ -66,10 +66,11 @@ export interface IQuery {
     auth(createAuthInput: CreateAuthInput): Token | Promise<Token>;
     collections(): Nullable<Collection>[] | Promise<Nullable<Collection>[]>;
     collectionsWithPosts(): Nullable<Collection>[] | Promise<Nullable<Collection>[]>;
-    collection(id: number): Nullable<Collection> | Promise<Nullable<Collection>>;
+    collectionWithPosts(id: number): Nullable<Collection> | Promise<Nullable<Collection>>;
+    collectionByUser(authorId: number): Nullable<Collection>[] | Promise<Nullable<Collection>[]>;
     posts(): Nullable<Post>[] | Promise<Nullable<Post>[]>;
     post(id: number): Nullable<Post> | Promise<Nullable<Post>>;
-    postsInCollection(id: number): Nullable<Post>[] | Promise<Nullable<Post>[]>;
+    postsInCollection(collectionId: number): Nullable<Post>[] | Promise<Nullable<Post>[]>;
     users(): Nullable<User>[] | Promise<Nullable<User>[]>;
     user(id: number): Nullable<User> | Promise<Nullable<User>>;
 }
@@ -91,11 +92,11 @@ export interface IMutation {
 
 export interface Collection {
     id: number;
-    title?: Nullable<string>;
+    title: string;
     heading?: Nullable<string>;
     posts?: Nullable<Nullable<Post>[]>;
     author?: Nullable<User>;
-    authorId?: Nullable<number>;
+    authorId: number;
     timestamp?: Nullable<Date>;
 }
 
@@ -105,7 +106,7 @@ export interface Post {
     title?: Nullable<string>;
     content?: Nullable<JSON>;
     published?: Nullable<boolean>;
-    collection?: Nullable<User>;
+    collection?: Nullable<Collection>;
     collectionId?: Nullable<number>;
 }
 
