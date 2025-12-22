@@ -21,6 +21,11 @@ export class PostsResolver {
     return this.postsService.findAllPostsInCollection(collectionId);
   }
 
+  @Query('postsByCollectionTitle')
+  findPostsByCollectionTitle(@Args('collectionTitle') collectionTitle: string) {
+    return this.postsService.findPostsByCollectionTitle(collectionTitle);
+  }
+
   @Query('post')
   findOne(@Args('id') id: number) {
     return this.postsService.findOne(id);

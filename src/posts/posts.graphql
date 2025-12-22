@@ -29,6 +29,7 @@ type Query {
   posts: [Post]!
   post(id: Int!): Post
   postsInCollection(collectionId: Int!): [Post]!
+  postsByCollectionTitle(collectionTitle: String!): [Post]!
 }
 
 type Mutation {

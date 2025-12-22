@@ -71,6 +71,7 @@ export interface IQuery {
     posts(): Nullable<Post>[] | Promise<Nullable<Post>[]>;
     post(id: number): Nullable<Post> | Promise<Nullable<Post>>;
     postsInCollection(collectionId: number): Nullable<Post>[] | Promise<Nullable<Post>[]>;
+    postsByCollectionTitle(collectionTitle: string): Nullable<Post>[] | Promise<Nullable<Post>[]>;
     users(): Nullable<User>[] | Promise<Nullable<User>[]>;
     user(id: number): Nullable<User> | Promise<Nullable<User>>;
 }
