@@ -7,13 +7,6 @@ import { UpdateCollectionInput } from './dto/update-collection.input';
 export class CollectionResolver {
   constructor(private readonly collectionService: CollectionService) {}
 
-  @Mutation('createCollection')
-  create(
-    @Args('createCollectionInput') createCollectionInput: CreateCollectionInput,
-  ) {
-    return this.collectionService.create(createCollectionInput);
-  }
-
   @Query('collections')
   findAll() {
     return this.collectionService.findAll();
@@ -32,6 +25,19 @@ export class CollectionResolver {
   @Query('collectionByUser')
   findCollectionByUser(@Args('authorId') authorId: number) {
     return this.collectionService.findCollectionByUser(authorId);
+  }
+
+  @Mutation('createCollection')
+  create(
+    @Args('createCollectionInput') createCollectionInput: CreateCollectionInput,
+  ) {
+    return this.collectionService.create(createCollectionInput);
+  }
+  @Mutation('upsertCollection')
+  upsert(
+    @Args('updateCollectionInput') updateCollectionInput: UpdateCollectionInput,
+  ) {
+    return this.collectionService.upsert(updateCollectionInput);
   }
 
   @Mutation('updateCollection')

@@ -18,15 +18,18 @@ export interface UpdateAuthInput {
 }
 
 export interface CreateCollectionInput {
-    title?: Nullable<string>;
-    heading?: Nullable<string>;
-    authorId?: Nullable<number>;
+    title: string;
+    heading: string;
+    headerImageString: string;
+    authorId: number;
 }
 
 export interface UpdateCollectionInput {
     id: number;
-    title?: Nullable<string>;
-    heading?: Nullable<string>;
+    authorId: number;
+    title: string;
+    heading: string;
+    headerImageString: string;
 }
 
 export interface CreatePostInput {
@@ -44,9 +47,8 @@ export interface UpdatePostInput {
 }
 
 export interface CreateUserInput {
-    name: string;
-    email?: Nullable<string>;
-    password?: Nullable<string>;
+    email: string;
+    password: string;
 }
 
 export interface UpdateUserInput {
@@ -81,6 +83,7 @@ export interface IMutation {
     updateAuth(updateAuthInput: UpdateAuthInput): Auth | Promise<Auth>;
     removeAuth(id: number): Nullable<Auth> | Promise<Nullable<Auth>>;
     createCollection(createCollectionInput: CreateCollectionInput): Collection | Promise<Collection>;
+    upsertCollection(updateCollectionInput: UpdateCollectionInput): Collection | Promise<Collection>;
     updateCollection(updateCollectionInput: UpdateCollectionInput): Collection | Promise<Collection>;
     removeCollection(id: number): Nullable<Collection> | Promise<Nullable<Collection>>;
     createPost(createPostInput: CreatePostInput): Post | Promise<Post>;
@@ -94,11 +97,12 @@ export interface IMutation {
 export interface Collection {
     id: number;
     title: string;
-    heading?: Nullable<string>;
+    heading: string;
+    headerImageString: string;
     posts?: Nullable<Nullable<Post>[]>;
-    author?: Nullable<User>;
+    author: User;
     authorId: number;
-    timestamp?: Nullable<Date>;
+    timestamp: Date;
 }
 
 export interface Post {
@@ -113,9 +117,9 @@ export interface Post {
 
 export interface User {
     id: number;
-    name: string;
-    email?: Nullable<string>;
-    password?: Nullable<string>;
+    name?: Nullable<string>;
+    email: string;
+    password: string;
     posts?: Nullable<Nullable<Post>[]>;
 }
 

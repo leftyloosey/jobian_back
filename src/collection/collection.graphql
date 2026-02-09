@@ -1,23 +1,27 @@
 type Collection {
   id: Int!
   title: String!
-  heading: String
+  heading: String!
+  headerImageString: String!
   posts: [Post]
-  author: User
+  author: User!
   authorId: Int!
-  timestamp: Date
+  timestamp: Date!
 }
 
 input CreateCollectionInput {
-  title: String
-  heading: String
-  authorId: Int
+  title: String!
+  heading: String!
+  headerImageString: String!
+  authorId: Int!
 }
 
 input UpdateCollectionInput {
   id: Int!
-  title: String
-  heading: String
+  authorId: Int!
+  title: String!
+  heading: String!
+  headerImageString: String!
 }
 
 type Query {
@@ -29,6 +33,7 @@ type Query {
 
 type Mutation {
   createCollection(createCollectionInput: CreateCollectionInput!): Collection!
+  upsertCollection(updateCollectionInput: UpdateCollectionInput!): Collection!
   updateCollection(updateCollectionInput: UpdateCollectionInput!): Collection!
   removeCollection(id: Int!): Collection
 }

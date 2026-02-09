@@ -8,13 +8,15 @@ export class CollectionService {
   constructor(private prisma: PrismaService) {}
 
   async create(createCollectionInput: CreateCollectionInput) {
-    const { title, heading, authorId } = createCollectionInput;
+    const { title, heading, authorId, headerImageString } =
+      createCollectionInput;
     try {
       const newCollection = await this.prisma.collection.create({
         data: {
           timestamp: new Date(),
           title,
           heading,
+          headerImageString,
           authorId,
         },
       });
@@ -22,6 +24,44 @@ export class CollectionService {
       return newCollection;
     } catch (error) {
       console.error('Error:', error);
+      throw error;
+    }
+  }
+  async upsert(updateCollectionInput: UpdateCollectionInput) {
+    const { id, title, heading, authorId, headerImageString } =
+      updateCollectionInput;
+    try {
+      const newCollection = await this.prisma.collection.upsert({
+        where: {
+          id: id,
+        },
+        update: {
+          timestamp: new Date(),
+          title,
+          heading,
+          headerImageString,
+          authorId,
+        },
+        create: {
+          timestamp: new Date(),
+          title,
+          heading,
+          headerImageString,
+          authorId,
+        },
+        // const newCollection = await this.prisma.collection.create({
+        //   data: {
+        //     timestamp: new Date(),
+        //     title,
+        //     heading,
+        //     headerImageString,
+        //     authorId,
+        //   },
+      });
+      console.log('Upserted:', newCollection);
+      return newCollection;
+    } catch (error) {
+      console.error('Upserting Error:', error);
       throw error;
     }
   }

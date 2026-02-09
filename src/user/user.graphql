@@ -1,15 +1,14 @@
 type User {
   id: Int!
-  name: String!
-  email: String
-  password: String
+  name: String
+  email: String!
+  password: String!
   posts: [Post]
 }
 
 input CreateUserInput {
-  name: String!
-  email: String
-  password: String
+  email: String!
+  password: String!
 }
 
 input UpdateUserInput {

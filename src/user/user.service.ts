@@ -13,12 +13,12 @@ export class UserService {
     const forHash: string = createUserInput.password;
     const hash = await bcrypt.hash(forHash, saltRounds);
 
-    const { name, email } = createUserInput;
+    const { email } = createUserInput;
     try {
       const newUser = await this.prisma.user.create({
         data: {
           email,
-          name,
+
           password: hash,
         },
       });

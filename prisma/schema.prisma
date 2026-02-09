@@ -17,14 +17,15 @@ model User {
 }
 
 model Collection {
-  id        Int      @id @default(autoincrement())
-  timestamp DateTime
-  title     String
-  heading   String
-  posts     Post[]
-  published Boolean  @default(true)
-  author    User     @relation(fields: [authorId], references: [id])
-  authorId  Int
+  id                Int      @id @default(autoincrement())
+  timestamp         DateTime
+  title             String
+  heading           String
+  headerImageString String
+  posts             Post[]
+  published         Boolean  @default(true)
+  author            User     @relation(fields: [authorId], references: [id])
+  authorId          Int
 }
 
 model Post {
@@ -34,6 +35,6 @@ model Post {
   published    Boolean    @default(true)
   timestamp    DateTime
   modified     DateTime?
-  collection   Collection @relation(fields: [collectionId], references: [id])
+  collection   Collection @relation(fields: [collectionId], references: [id], onDelete: Cascade)
   collectionId Int
 }
