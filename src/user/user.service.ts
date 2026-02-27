@@ -3,6 +3,7 @@ import { CreateUserInput } from './dto/create-user.input';
 // import { UpdateUserInput } from './dto/update-user.input';
 import { PrismaService } from 'src/prisma.service';
 import * as bcrypt from 'bcrypt';
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime/client';
 
 @Injectable()
 export class UserService {
@@ -13,32 +14,60 @@ export class UserService {
     const forHash: string = createUserInput.password;
     const hash = await bcrypt.hash(forHash, saltRounds);
 
-    const { email } = createUserInput;
+    const { email, owner } = createUserInput;
     try {
+      const ownerExists = await this.prisma.user
+        .findFirst({
+          where: {
+            owner: true,
+          },
+        })
+        .then((owner) => {
+          if (owner) {
+            throw new Error('boner exists');
+          }
+        });
+      console.log('exists', ownerExists);
+      // const newUser = {
+      //   email: email,
+      //   owner: owner,
+      //   id: 0,
+      //   password: hash,
+      // };
+      // if (ownerExists) throw new Error('owner exists');
+      // else {
       const newUser = await this.prisma.user.create({
         data: {
           email,
-
+          owner,
           password: hash,
         },
       });
-      console.log('User created:', newUser);
+      // }
+
+      if (createUserInput.owner) {
+        console.log('Owner created:', newUser);
+      } else {
+        console.log('User created:', newUser);
+      }
+
       return newUser;
     } catch (error) {
+      if (error instanceof PrismaClientKnownRequestError) {
+        error.message = 'Blog already has owner';
+        throw error;
+      }
       console.error('Error creating user:', error);
       throw error;
     }
   }
 
-  async findAllWithMinistries() {
-    const usersWithPosts = await this.prisma.user.findMany({
-      include: {
-        ministries: true,
-      },
+  async findCollectionsOfOwner() {
+    const collectionsOfOwner = await this.prisma.user.findFirst({
+      where: { owner: true },
+      include: { collections: true },
     });
-    return usersWithPosts;
-    // const users = await this.prisma.user.findMany();
-    // return users;
+    return collectionsOfOwner;
   }
 
   async getUserForAuth(email: string, password: string) {

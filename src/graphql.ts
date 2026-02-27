@@ -32,6 +32,29 @@ export interface UpdateCollectionInput {
     headerImageString: string;
 }
 
+export interface CreateNavHeadingInput {
+    blogTitle: string;
+    authorId: number;
+}
+
+export interface UpdateNavHeadingInput {
+    id: number;
+    blogTitle: string;
+    authorId: number;
+}
+
+export interface CreateNavMemberInput {
+    collectionId: number;
+    title: string;
+    content: JSON;
+}
+
+export interface UpdateNavMemberInput {
+    id: number;
+    title: string;
+    content: JSON;
+}
+
 export interface CreatePostInput {
     title?: Nullable<string>;
     content?: Nullable<JSON>;
@@ -49,6 +72,7 @@ export interface UpdatePostInput {
 export interface CreateUserInput {
     email: string;
     password: string;
+    owner: boolean;
 }
 
 export interface UpdateUserInput {
@@ -70,12 +94,18 @@ export interface IQuery {
     collectionsWithPosts(): Nullable<Collection>[] | Promise<Nullable<Collection>[]>;
     collectionWithPosts(id: number): Nullable<Collection> | Promise<Nullable<Collection>>;
     collectionByUser(authorId: number): Nullable<Collection>[] | Promise<Nullable<Collection>[]>;
+    navHeadings(): Nullable<Nullable<NavHeading>[]> | Promise<Nullable<Nullable<NavHeading>[]>>;
+    navHeading(id: number): Nullable<NavHeading> | Promise<Nullable<NavHeading>>;
+    navMembers(): Nullable<Nullable<NavMember>[]> | Promise<Nullable<Nullable<NavMember>[]>>;
+    navMember(id: number): Nullable<NavMember> | Promise<Nullable<NavMember>>;
+    navMembersInHeading(collectionId: number): Nullable<Nullable<NavMember>[]> | Promise<Nullable<Nullable<NavMember>[]>>;
     posts(): Nullable<Post>[] | Promise<Nullable<Post>[]>;
     post(id: number): Nullable<Post> | Promise<Nullable<Post>>;
     postsInCollection(collectionId: number): Nullable<Post>[] | Promise<Nullable<Post>[]>;
     postsByCollectionTitle(collectionTitle: string): Nullable<Post>[] | Promise<Nullable<Post>[]>;
     users(): Nullable<User>[] | Promise<Nullable<User>[]>;
     user(id: number): Nullable<User> | Promise<Nullable<User>>;
+    collectionsOfOwner(): User | Promise<User>;
 }
 
 export interface IMutation {
@@ -86,6 +116,13 @@ export interface IMutation {
     upsertCollection(updateCollectionInput: UpdateCollectionInput): Collection | Promise<Collection>;
     updateCollection(updateCollectionInput: UpdateCollectionInput): Collection | Promise<Collection>;
     removeCollection(id: number): Nullable<Collection> | Promise<Nullable<Collection>>;
+    createNavHeading(createNavHeadingInput: CreateNavHeadingInput): NavHeading | Promise<NavHeading>;
+    updateNavHeading(updateNavHeadingInput: UpdateNavHeadingInput): NavHeading | Promise<NavHeading>;
+    upsertNavHeading(updateNavHeadingInput: UpdateNavHeadingInput): NavHeading | Promise<NavHeading>;
+    removeNavHeading(id: number): Nullable<NavHeading> | Promise<Nullable<NavHeading>>;
+    createNavMember(createNavMemberInput: CreateNavMemberInput): NavMember | Promise<NavMember>;
+    updateNavMember(updateNavMemberInput: UpdateNavMemberInput): NavMember | Promise<NavMember>;
+    removeNavMember(id: number): Nullable<NavMember> | Promise<Nullable<NavMember>>;
     createPost(createPostInput: CreatePostInput): Post | Promise<Post>;
     updatePost(updatePostInput: UpdatePostInput): Post | Promise<Post>;
     removePost(id: number): Nullable<Post> | Promise<Nullable<Post>>;
@@ -105,6 +142,22 @@ export interface Collection {
     timestamp: Date;
 }
 
+export interface NavHeading {
+    id: number;
+    blogTitle: string;
+    navRow: Nullable<NavMember>[];
+    author: User;
+    authorId: number;
+}
+
+export interface NavMember {
+    id: number;
+    title: string;
+    content: JSON;
+    navHeading: NavHeading;
+    collectionId: number;
+}
+
 export interface Post {
     id: number;
     timestamp?: Nullable<Date>;
@@ -120,7 +173,9 @@ export interface User {
     name?: Nullable<string>;
     email: string;
     password: string;
+    owner: boolean;
     posts?: Nullable<Nullable<Post>[]>;
+    collections?: Nullable<Nullable<Collection>[]>;
 }
 
 export type JSON = any;

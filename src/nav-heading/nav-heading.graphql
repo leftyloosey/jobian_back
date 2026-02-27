@@ -1,0 +1,30 @@
+type NavHeading {
+  id: Int!
+  blogTitle: String!
+  navRow: [NavMember]!
+  author: User!
+  authorId: Int!
+}
+
+input CreateNavHeadingInput {
+  blogTitle: String!
+  authorId: Int!
+}
+
+input UpdateNavHeadingInput {
+  id: Int!
+  blogTitle: String!
+  authorId: Int!
+}
+
+type Query {
+  navHeadings: [NavHeading]
+  navHeading(id: Int!): NavHeading
+}
+
+type Mutation {
+  createNavHeading(createNavHeadingInput: CreateNavHeadingInput!): NavHeading!
+  updateNavHeading(updateNavHeadingInput: UpdateNavHeadingInput!): NavHeading!
+  upsertNavHeading(updateNavHeadingInput: UpdateNavHeadingInput!): NavHeading!
+  removeNavHeading(id: Int!): NavHeading
+}

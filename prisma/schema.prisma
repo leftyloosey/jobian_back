@@ -9,11 +9,13 @@ datasource db {
 }
 
 model User {
-  id         Int          @id @default(autoincrement())
-  email      String       @unique
-  password   String
-  name       String?
-  ministries Collection[]
+  id          Int          @id @default(autoincrement())
+  email       String       @unique
+  password    String
+  name        String?
+  owner       Boolean      @default(false)
+  collections Collection[]
+  navigation  NavHeading[]
 }
 
 model Collection {
@@ -36,5 +38,21 @@ model Post {
   timestamp    DateTime
   modified     DateTime?
   collection   Collection @relation(fields: [collectionId], references: [id], onDelete: Cascade)
+  collectionId Int
+}
+
+model NavHeading {
+  id        Int         @id @default(autoincrement())
+  blogTitle String
+  navRow    NavMember[]
+  author    User        @relation(fields: [authorId], references: [id])
+  authorId  Int
+}
+
+model NavMember {
+  id           Int        @id @default(autoincrement())
+  title        String
+  content      Json
+  navHeading   NavHeading @relation(fields: [collectionId], references: [id], onDelete: Cascade)
   collectionId Int
 }

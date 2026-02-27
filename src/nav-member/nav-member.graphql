@@ -1,0 +1,33 @@
+scalar JSON
+
+type NavMember {
+  id: Int!
+  title: String!
+  content: JSON!
+  navHeading: NavHeading!
+  collectionId: Int!
+}
+
+input CreateNavMemberInput {
+  collectionId: Int!
+  title: String!
+  content: JSON!
+}
+
+input UpdateNavMemberInput {
+  id: Int!
+  title: String!
+  content: JSON!
+}
+
+type Query {
+  navMembers: [NavMember]
+  navMember(id: Int!): NavMember
+  navMembersInHeading(collectionId: Int!): [NavMember]
+}
+
+type Mutation {
+  createNavMember(createNavMemberInput: CreateNavMemberInput!): NavMember!
+  updateNavMember(updateNavMemberInput: UpdateNavMemberInput!): NavMember!
+  removeNavMember(id: Int!): NavMember
+}

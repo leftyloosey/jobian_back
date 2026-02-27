@@ -17,14 +17,18 @@ export class UserResolver {
   //   return this.userService.findAll();
   // }
 
-  @Query('users')
-  findAll() {
-    return this.userService.findAllWithMinistries();
-  }
+  // @Query('users')
+  // findAll() {
+  //   return this.userService.findAllWithMinistries();
+  // }
 
   @Query('user')
   findOne(@Args('id') id: number) {
     return this.userService.findOne(id);
+  }
+  @Query('collectionsOfOwner')
+  findCollectionsOfOwner() {
+    return this.userService.findCollectionsOfOwner();
   }
 
   // @Mutation('updateUser')

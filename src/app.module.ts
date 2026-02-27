@@ -8,6 +8,8 @@ import { join } from 'path';
 import { UserModule } from './user/user.module';
 import { CollectionModule } from './collection/collection.module';
 import { AuthModule } from './auth/auth.module';
+import { NavHeadingModule } from './nav-heading/nav-heading.module';
+import { NavMemberModule } from './nav-member/nav-member.module';
 import GraphQLJSON from 'graphql-type-json';
 
 @Module({
@@ -25,6 +27,8 @@ import GraphQLJSON from 'graphql-type-json';
     UserModule,
     CollectionModule,
     AuthModule,
+    NavHeadingModule,
+    NavMemberModule,
   ],
 
   controllers: [AppController],
