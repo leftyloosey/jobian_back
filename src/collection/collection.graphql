@@ -1,17 +1,19 @@
 type Collection {
   id: Int!
   title: String!
+  urlTitle: String!
   heading: String!
-  headerImageString: String!
   posts: [Post]
   author: User!
   authorId: Int!
   timestamp: Date!
+  headerImageString: String!
 }
 
 input CreateCollectionInput {
   title: String!
   heading: String!
+  urlTitle: String!
   headerImageString: String!
   authorId: Int!
 }
@@ -20,6 +22,7 @@ input UpdateCollectionInput {
   id: Int!
   authorId: Int!
   title: String!
+  urlTitle: String!
   heading: String!
   headerImageString: String!
 }

@@ -15,27 +15,23 @@ export class UserService {
     const hash = await bcrypt.hash(forHash, saltRounds);
 
     const { email, owner } = createUserInput;
+
     try {
-      const ownerExists = await this.prisma.user
-        .findFirst({
-          where: {
-            owner: true,
-          },
-        })
-        .then((owner) => {
-          if (owner) {
-            throw new Error('boner exists');
-          }
-        });
-      console.log('exists', ownerExists);
-      // const newUser = {
-      //   email: email,
-      //   owner: owner,
-      //   id: 0,
-      //   password: hash,
-      // };
-      // if (ownerExists) throw new Error('owner exists');
-      // else {
+      if (owner) {
+        const ownerExists = await this.prisma.user
+          .findFirst({
+            where: {
+              owner: true,
+            },
+          })
+          .then((owner) => {
+            if (owner) {
+              throw new Error('owner exists');
+            }
+          });
+        console.log('exists', ownerExists);
+      }
+
       const newUser = await this.prisma.user.create({
         data: {
           email,

@@ -17,10 +17,10 @@ export class NavHeadingService {
         },
       });
 
-      console.log('navMember created:', newNavHeading);
+      console.log('navheading created:', newNavHeading);
       return newNavHeading;
     } catch (error) {
-      console.error('Error creating navMember:', error);
+      console.error('Error creating navheading:', error);
       throw error;
     }
   }

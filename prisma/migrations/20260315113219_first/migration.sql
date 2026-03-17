@@ -14,10 +14,11 @@ CREATE TABLE "Collection" (
     "id" SERIAL NOT NULL,
     "timestamp" TIMESTAMP(3) NOT NULL,
     "title" TEXT NOT NULL,
+    "urlTitle" TEXT NOT NULL,
     "heading" TEXT NOT NULL,
-    "headerImageString" TEXT NOT NULL,
     "published" BOOLEAN NOT NULL DEFAULT true,
     "authorId" INTEGER NOT NULL,
+    "headerImageString" TEXT NOT NULL,
 
     CONSTRAINT "Collection_pkey" PRIMARY KEY ("id")
 );
@@ -49,6 +50,7 @@ CREATE TABLE "NavMember" (
     "id" SERIAL NOT NULL,
     "title" TEXT NOT NULL,
     "content" JSONB NOT NULL,
+    "timestamp" TIMESTAMP(3) NOT NULL,
     "collectionId" INTEGER NOT NULL,
 
     CONSTRAINT "NavMember_pkey" PRIMARY KEY ("id")

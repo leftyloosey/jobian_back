@@ -20,6 +20,7 @@ export interface UpdateAuthInput {
 export interface CreateCollectionInput {
     title: string;
     heading: string;
+    urlTitle: string;
     headerImageString: string;
     authorId: number;
 }
@@ -28,6 +29,7 @@ export interface UpdateCollectionInput {
     id: number;
     authorId: number;
     title: string;
+    urlTitle: string;
     heading: string;
     headerImageString: string;
 }
@@ -47,6 +49,7 @@ export interface CreateNavMemberInput {
     collectionId: number;
     title: string;
     content: JSON;
+    timestamp?: Nullable<Date>;
 }
 
 export interface UpdateNavMemberInput {
@@ -134,12 +137,13 @@ export interface IMutation {
 export interface Collection {
     id: number;
     title: string;
+    urlTitle: string;
     heading: string;
-    headerImageString: string;
     posts?: Nullable<Nullable<Post>[]>;
     author: User;
     authorId: number;
     timestamp: Date;
+    headerImageString: string;
 }
 
 export interface NavHeading {
@@ -156,6 +160,7 @@ export interface NavMember {
     content: JSON;
     navHeading: NavHeading;
     collectionId: number;
+    timestamp?: Nullable<Date>;
 }
 
 export interface Post {

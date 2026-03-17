@@ -5,6 +5,7 @@ export class UpdateCollectionInput extends PartialType(CreateCollectionInput) {
   id: number;
   authorId: number;
   title: string;
+  urlTitle: string;
   heading: string;
   headerImageString: string;
 }

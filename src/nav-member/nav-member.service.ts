@@ -15,6 +15,7 @@ export class NavMemberService {
           title,
           content,
           collectionId,
+          timestamp: new Date(),
         },
       });
 

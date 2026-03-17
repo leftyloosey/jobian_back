@@ -22,12 +22,13 @@ model Collection {
   id                Int      @id @default(autoincrement())
   timestamp         DateTime
   title             String
+  urlTitle          String
   heading           String
-  headerImageString String
   posts             Post[]
   published         Boolean  @default(true)
   author            User     @relation(fields: [authorId], references: [id])
   authorId          Int
+  headerImageString String
 }
 
 model Post {
@@ -53,6 +54,7 @@ model NavMember {
   id           Int        @id @default(autoincrement())
   title        String
   content      Json
+  timestamp    DateTime
   navHeading   NavHeading @relation(fields: [collectionId], references: [id], onDelete: Cascade)
   collectionId Int
 }

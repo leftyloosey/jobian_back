@@ -8,13 +8,14 @@ export class CollectionService {
   constructor(private prisma: PrismaService) {}
 
   async create(createCollectionInput: CreateCollectionInput) {
-    const { title, heading, authorId, headerImageString } =
+    const { title, urlTitle, heading, authorId, headerImageString } =
       createCollectionInput;
     try {
       const newCollection = await this.prisma.collection.create({
         data: {
           timestamp: new Date(),
           title,
+          urlTitle,
           heading,
           headerImageString,
           authorId,
@@ -28,16 +29,17 @@ export class CollectionService {
     }
   }
   async upsert(updateCollectionInput: UpdateCollectionInput) {
-    const { id, title, heading, authorId, headerImageString } =
+    const { id, title, urlTitle, heading, authorId, headerImageString } =
       updateCollectionInput;
     try {
       const newCollection = await this.prisma.collection.upsert({
         where: {
-          id: id,
+          id,
         },
         update: {
           timestamp: new Date(),
           title,
+          urlTitle,
           heading,
           headerImageString,
           authorId,
@@ -45,6 +47,7 @@ export class CollectionService {
         create: {
           timestamp: new Date(),
           title,
+          urlTitle,
           heading,
           headerImageString,
           authorId,

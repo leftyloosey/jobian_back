@@ -37,12 +37,19 @@ export class PostsService {
     });
     return posts;
   }
+
   async findPostsByCollectionTitle(collectionTitle: string) {
     const posts = await this.prisma.post.findMany({
-      where: { collection: { title: collectionTitle } },
+      where: { collection: { urlTitle: collectionTitle } },
     });
     return posts;
   }
+  // async findPostsByCollectionTitle(collectionTitle: string) {
+  //   const posts = await this.prisma.post.findMany({
+  //     where: { collection: { title: collectionTitle } },
+  //   });
+  //   return posts;
+  // }
 
   async findOne(id: number) {
     const post = await this.prisma.post.findUnique({
