@@ -32,14 +32,16 @@ model Collection {
 }
 
 model Post {
-  id           Int        @id @default(autoincrement())
-  title        String
-  content      Json
-  published    Boolean    @default(true)
-  timestamp    DateTime
-  modified     DateTime?
-  collection   Collection @relation(fields: [collectionId], references: [id], onDelete: Cascade)
-  collectionId Int
+  id                Int        @id @default(autoincrement())
+  title             String
+  heading           String
+  content           Json
+  published         Boolean    @default(true)
+  timestamp         DateTime
+  modified          DateTime?
+  collection        Collection @relation(fields: [collectionId], references: [id], onDelete: Cascade)
+  collectionId      Int
+  headerImageString String
 }
 
 model NavHeading {

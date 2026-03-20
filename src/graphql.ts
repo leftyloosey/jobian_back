@@ -60,8 +60,10 @@ export interface UpdateNavMemberInput {
 
 export interface CreatePostInput {
     title?: Nullable<string>;
+    heading?: Nullable<string>;
     content?: Nullable<JSON>;
     collectionId?: Nullable<number>;
+    headerImageString?: Nullable<string>;
 }
 
 export interface UpdatePostInput {
@@ -70,6 +72,8 @@ export interface UpdatePostInput {
     content?: Nullable<JSON>;
     published?: Nullable<boolean>;
     modified?: Nullable<Date>;
+    heading?: Nullable<string>;
+    headerImageString?: Nullable<string>;
 }
 
 export interface CreateUserInput {
@@ -165,12 +169,14 @@ export interface NavMember {
 
 export interface Post {
     id: number;
-    timestamp?: Nullable<Date>;
-    title?: Nullable<string>;
-    content?: Nullable<JSON>;
-    published?: Nullable<boolean>;
+    timestamp: Date;
+    heading: string;
+    title: string;
+    content: JSON;
+    published: boolean;
     collection?: Nullable<Collection>;
     collectionId?: Nullable<number>;
+    headerImageString: string;
 }
 
 export interface User {

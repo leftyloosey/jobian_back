@@ -27,11 +27,13 @@ CREATE TABLE "Collection" (
 CREATE TABLE "Post" (
     "id" SERIAL NOT NULL,
     "title" TEXT NOT NULL,
+    "heading" TEXT NOT NULL,
     "content" JSONB NOT NULL,
     "published" BOOLEAN NOT NULL DEFAULT true,
     "timestamp" TIMESTAMP(3) NOT NULL,
     "modified" TIMESTAMP(3),
     "collectionId" INTEGER NOT NULL,
+    "headerImageString" TEXT NOT NULL,
 
     CONSTRAINT "Post_pkey" PRIMARY KEY ("id")
 );

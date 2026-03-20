@@ -7,4 +7,6 @@ export class UpdatePostInput extends PartialType(CreatePostInput) {
   title: string;
   content: InputJsonObject;
   published: boolean;
+  heading: string;
+  headerImageString: string;
 }

@@ -8,13 +8,16 @@ export class PostsService {
   constructor(private prisma: PrismaService) {}
 
   async create(createPostInput: CreatePostInput) {
-    const { title, content, collectionId } = createPostInput;
+    const { title, content, collectionId, heading, headerImageString } =
+      createPostInput;
     try {
       const newPost = await this.prisma.post.create({
         data: {
           timestamp: new Date(),
           title,
           content,
+          heading,
+          headerImageString,
           collectionId,
         },
       });

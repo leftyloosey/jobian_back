@@ -3,18 +3,22 @@ scalar Date
 
 type Post {
   id: Int!
-  timestamp: Date
-  title: String
-  content: JSON
-  published: Boolean
+  timestamp: Date!
+  heading: String!
+  title: String!
+  content: JSON!
+  published: Boolean!
   collection: Collection
   collectionId: Int
+  headerImageString: String!
 }
 
 input CreatePostInput {
   title: String
+  heading: String
   content: JSON
   collectionId: Int
+  headerImageString: String
 }
 
 input UpdatePostInput {
@@ -23,6 +27,8 @@ input UpdatePostInput {
   content: JSON
   published: Boolean
   modified: Date
+  heading: String
+  headerImageString: String
 }
 
 type Query {
